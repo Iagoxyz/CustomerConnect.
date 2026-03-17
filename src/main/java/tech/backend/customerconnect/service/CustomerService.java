@@ -87,4 +87,15 @@ public class CustomerService {
 
         return customer;
     }
+
+    public boolean deleteById(Long id) {
+
+        var exists = customerRepository.existsById(id);
+
+        if (exists) {
+            customerRepository.deleteById(id);
+        }
+
+        return exists;
+    }
 }

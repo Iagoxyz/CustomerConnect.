@@ -6,6 +6,14 @@ info:
 http:
   method: PUT
   url: http://localhost:8080/customer/1
+  body:
+    type: json
+    data: |-
+      {
+        "fullName": "Iago Carvalho",
+        "email": "iagocarvalho@gmail.com",
+        "phoneNumber": "7777-8888"
+      }
   auth: inherit
 
 settings:
