@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.backend.customerconnect.controller.dto.ApiResponse;
 import tech.backend.customerconnect.controller.dto.CreateCustomerDto;
+import tech.backend.customerconnect.controller.dto.PaginationResponse;
 import tech.backend.customerconnect.entity.CustomerEntity;
 import tech.backend.customerconnect.service.CustomerService;
 
@@ -33,7 +34,10 @@ public class CustomerController {
                                                                @RequestParam(name = "orderBy", defaultValue = "desc") String orderBy,
                                                                @RequestParam(name = "cpf", required = false) String cpf,
                                                                @RequestParam(name = "email", required = false) String email) {
-        var PageRequest = customerService.findAll(page, pageSize, orderBy, cpf, email);
-        return ResponseEntity.ok(customer);
+
+        var pageResp = customerService.findAll(page, pageSize, orderBy, cpf, email);
+        return ResponseEntity.ok(new ApiResponse<>(
+                pageResp.getContent(), new PaginationResponse(pageResp.getNumber(), pageResp.getSize(), pageResp.getTotalElements(), pageResp.getTotalPages())
+        ));
     }
 }
