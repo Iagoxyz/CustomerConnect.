@@ -15,6 +15,9 @@ public class CustomerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long customerId;
 
+    @Column(name = "full_name")
+    private String fullName;
+
     @Column(name = "cpf", unique = true)
     private String cpf;
 
@@ -33,6 +36,14 @@ public class CustomerEntity {
     private LocalDateTime updatedAt;
 
     public CustomerEntity() {
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public Long getCustomerId() {
